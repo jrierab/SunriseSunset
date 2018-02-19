@@ -1,17 +1,35 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Home</ion-title>
+    <ion-title>Sortida/posta de Sol</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+  <ion-list>
+    <ion-item-divider color="light">Lloc</ion-item-divider>
+    <ion-item>
+      <ion-label>Latitud</ion-label>
+      <ion-note item-right>{{ lat }}</ion-note>
+    </ion-item>
+    <ion-item>
+        <ion-label>Longitud</ion-label>
+        <ion-note item-right>{{ lon }}</ion-note>
+      </ion-item>
+  
+    <ion-item-divider color="light">Data</ion-item-divider>
+    <ion-item>
+      <ion-note item-right>Avui</ion-note>
+    </ion-item>
+
+    <ion-item-divider color="light">Horari</ion-item-divider>
+    <ion-item>
+      <ion-icon name="sunny" color="orange" item-left></ion-icon>
+      <ion-note item-right>{{ sunrise }}</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="moon" color="blue" item-left></ion-icon>
+      <ion-note item-right>{{ sunset }}</ion-note>
+    </ion-item>
+
+  </ion-list>
 </ion-content>
