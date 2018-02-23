@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Geolocation } from '@ionic-native/geolocation';
 
 @Component({
   selector: 'page-home',
@@ -17,13 +18,34 @@ export class HomePage {
   sunrise : string;
   sunset : string;
 
+  posMsg : string;
+  posError : boolean = false;
+
   constructor(  public navCtrl: NavController,
-                public http: HttpClient
+                public http: HttpClient,
+                private geolocation: Geolocation
   )
   {
   }
 
   ionViewDidLoad() {
+    this.geolocation.getCurrentPosition().then((answer) => {
+      //console.log(answer);
+      this.lat = answer.coords.latitude;
+      this.lon = answer.coords.longitude;
+      this.posMsg = "Posició actual";
+      this.getSunriseSunsetFromApi();
+
+    }).catch((error) => {
+       console.log('Error getting location', error);
+       this.posMsg = "Per defecte";
+       this.posError = true;
+       this.getSunriseSunsetFromApi();
+     });
+     
+  }
+
+  getSunriseSunsetFromApi() {
     console.log("Calling API...");
 
     let data = {  lat: this.lat.toString(), 
@@ -49,7 +71,7 @@ export class HomePage {
       }
     },
     err => console.log(err)
-    );
+    );    
   }
 
 }

@@ -6,7 +6,12 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item-divider color="light">Lloc</ion-item-divider>
+    <ion-item-divider color="light">Lloc: {{ posMsg }}</ion-item-divider>
+    <ion-item color="light" *ngIf="posError">
+      <h2>No s'ha pogut obtenir la posició actual</h2>
+      <p>Verifica els permisos</p>
+      <ion-icon name="warning" color="danger" item-left></ion-icon>
+    </ion-item>
     <ion-item>
       <ion-label>Latitud</ion-label>
       <ion-note item-right>{{ lat }}</ion-note>
