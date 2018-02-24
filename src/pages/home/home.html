@@ -14,16 +14,17 @@
     </ion-item>
     <ion-item>
       <ion-label>Latitud</ion-label>
-      <ion-note item-right>{{ lat }}</ion-note>
+      <ion-note item-right>{{ lat | number: "1.1-7" }}</ion-note>
     </ion-item>
     <ion-item>
         <ion-label>Longitud</ion-label>
-        <ion-note item-right>{{ lon }}</ion-note>
+        <ion-note item-right>{{ lon | number: "1.1-7" }}</ion-note>
       </ion-item>
   
     <ion-item-divider color="light">Data</ion-item-divider>
-    <ion-item>
-      <ion-note item-right>Avui</ion-note>
+    <ion-item (click)="selectDate()">
+      <ion-icon name="search" item-left color="primary"></ion-icon>
+      <ion-note item-right>{{ dateMsg }}</ion-note>
     </ion-item>
 
     <ion-item-divider color="light">Horari</ion-item-divider>
