@@ -14,6 +14,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HttpClientModule } from '@angular/common/http';
 import { Geolocation } from '@ionic-native/geolocation';
 import { CalendarModule } from "ion2-calendar";
+import { LocationSelect } from '../pages/location-select/location-select';
+import { Connectivity } from '../providers/connectivity-service';
+import { GoogleMapsService } from '../providers/google-maps-service';
+import { Network } from '@ionic-native/network';
 
 @NgModule({
   declarations: [
@@ -21,6 +25,7 @@ import { CalendarModule } from "ion2-calendar";
     AboutPage,
     ContactPage,
     HomePage,
+    LocationSelect,
     TabsPage
   ],
   imports: [
@@ -35,13 +40,17 @@ import { CalendarModule } from "ion2-calendar";
     AboutPage,
     ContactPage,
     HomePage,
+    LocationSelect,
     TabsPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    Geolocation
+    Geolocation,
+    Connectivity,
+    GoogleMapsService,
+    Network
   ]
 })
 export class AppModule {}

@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Geolocation } from '@ionic-native/geolocation';
 import { CalendarModal, CalendarModalOptions, CalendarResult } from "ion2-calendar";
 import * as moment from 'moment';
+import { LocationSelect } from '../location-select/location-select';
 
 @Component({
   selector: 'page-home',
@@ -20,6 +21,8 @@ export class HomePage {
   sunrise : string;
   sunset : string;
 
+  isLoading : boolean = true;
+
   date : Date = new Date();
   dateMsg: string = "Avui";
   posMsg : string;
@@ -28,25 +31,34 @@ export class HomePage {
   constructor(  public http: HttpClient,
                 private geolocation: Geolocation,
                 public modalCtrl: ModalController
-  )
+              )
   {
     moment.locale('ca-ES');
   }
 
   ionViewDidLoad() {
-    this.geolocation.getCurrentPosition().then((answer) => {
+    let options = {
+      enableHighAccuracy: true,
+      timeout: 3000,
+      maximumAge: 0
+    };
+
+    this.geolocation.getCurrentPosition(options).then((answer) => {
       //console.log(answer);
       this.lat = answer.coords.latitude;
       this.lon = answer.coords.longitude;
       this.posMsg = "Posició actual";
+      this.posError = false;
+      this.isLoading = false;
       this.getSunriseSunsetFromApi();
 
     }).catch((error) => {
-       console.log('Error getting location', error);
-       this.posMsg = "Per defecte";
-       this.posError = true;
-       this.getSunriseSunsetFromApi();
-     });
+      this.posMsg = "Per defecte";
+      this.posError = true;
+      this.isLoading = false;
+      this.getSunriseSunsetFromApi();
+      console.log('Error getting location', error);
+    });
   }
 
   selectDate() {
@@ -102,5 +114,23 @@ export class HomePage {
     err => console.log(err)
     );    
   }
+
+  launchLocationPage() {
+		let modal = this.modalCtrl.create(LocationSelect, {lat: this.lat, lon: this.lon});
+	
+		modal.onDidDismiss((location) => {
+      if(location) {
+        console.log("Nou lloc: ", location);
+        
+        this.lat = location.lat;
+        this.lon = location.lng;
+        this.posMsg = location.name;
+        this.posError = false;
+        this.getSunriseSunsetFromApi();
+      }
+		});
+
+		modal.present();	
+	}
 
 }
