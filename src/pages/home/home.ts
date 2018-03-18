@@ -7,6 +7,9 @@ import { CalendarModal, CalendarModalOptions, CalendarResult } from "ion2-calend
 import * as moment from 'moment';
 import { LocationSelect } from '../location-select/location-select';
 
+import {TranslateService} from '@ngx-translate/core';
+import { LangService } from '../../providers/lang-service';
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -24,19 +27,25 @@ export class HomePage {
   isLoading : boolean = true;
 
   date : Date = new Date();
-  dateMsg: string = "Avui";
+  dateMsg: string;
   posMsg : string;
   posError : boolean = false;
 
+  lang : string;
+  isRealLocation : boolean = false;
+  isRealDate : boolean = false;
+
   constructor(  public http: HttpClient,
                 private geolocation: Geolocation,
-                public modalCtrl: ModalController
+                public modalCtrl: ModalController,
+                public translate: TranslateService,
+                public langService : LangService,  
               )
   {
-    moment.locale('ca-ES');
   }
 
   ionViewDidLoad() {
+    console.log("### HomePage");
     let options = {
       enableHighAccuracy: true,
       timeout: 3000,
@@ -47,26 +56,34 @@ export class HomePage {
       //console.log(answer);
       this.lat = answer.coords.latitude;
       this.lon = answer.coords.longitude;
-      this.posMsg = "Posició actual";
+      this.posMsg = "APP.current-pos";
       this.posError = false;
       this.isLoading = false;
       this.getSunriseSunsetFromApi();
 
     }).catch((error) => {
-      this.posMsg = "Per defecte";
+      this.posMsg = "APP.default-pos";
       this.posError = true;
       this.isLoading = false;
       this.getSunriseSunsetFromApi();
       console.log('Error getting location', error);
     });
+
+    this.dateMsg = "APP.today";
+
+    this.langService.onLang.subscribe(lang=> {
+      this.lang = this.translate.currentLang;
+      console.log("[HomePage] Current lang: "+this.lang);
+      moment.locale(this.lang);  
+    });
   }
 
   selectDate() {
     const options: CalendarModalOptions = {
-      title: 'Escull la data',
+      title: this.translate.instant("APP.date-choose"),
       canBackwardsSelected: true,
-      closeLabel: "Cancel·lar",
-      doneLabel: "Fet",
+      closeLabel: this.translate.instant('APP.Cancel'),
+      doneLabel: this.translate.instant('APP.Done'),
       weekdays: moment.weekdaysShort(),
       weekStart: 1,
     };
@@ -80,7 +97,8 @@ export class HomePage {
       if(date) {
         console.log(date);
         this.date = date.dateObj;
-        this.dateMsg = this.date.toLocaleDateString("ca-ES");
+        this.dateMsg = this.date.toLocaleDateString(this.lang);
+        this.isRealDate = true;
         this.getSunriseSunsetFromApi();
       }
     });
@@ -106,9 +124,9 @@ export class HomePage {
         let date_options = {hour: "2-digit", minute: "2-digit"};
 
         this.sunrise = new Date(answer['results'].sunrise)
-                                .toLocaleTimeString("ca-ES", date_options);
+                                .toLocaleTimeString(this.lang, date_options);
         this.sunset = new Date(answer['results'].sunset)
-                                .toLocaleTimeString("ca-ES", date_options);
+                                .toLocaleTimeString(this.lang, date_options);
       }
     },
     err => console.log(err)
@@ -120,11 +138,12 @@ export class HomePage {
 	
 		modal.onDidDismiss((location) => {
       if(location) {
-        console.log("Nou lloc: ", location);
+        console.log("New place: ", location);
         
         this.lat = location.lat;
         this.lon = location.lng;
         this.posMsg = location.name;
+        this.isRealLocation = true;
         this.posError = false;
         this.getSunriseSunsetFromApi();
       }
@@ -133,4 +152,7 @@ export class HomePage {
 		modal.present();	
 	}
 
+  doChangeLang() {
+    this.langService.setLanguage(this.lang);
+  }
 }

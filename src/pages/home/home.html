@@ -1,36 +1,49 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Sortida/posta de Sol</ion-title>
+    <ion-title>{{ "APP.title" | translate }}</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
   <ion-list>
-    <ion-item-divider color="light" (click)="launchLocationPage()">Lloc: {{ posMsg }}</ion-item-divider>
+    <ion-item-divider color="light">{{ "APP.language" | translate }}</ion-item-divider>
+    <ion-item>
+      <ion-label>{{ "APP.lang-current" | translate }}</ion-label>
+      <ion-select [(ngModel)]="lang" (ionChange)="doChangeLang()" item-right>
+        <ion-option value="ca">Català</ion-option>
+        <ion-option value="en">English</ion-option>
+      </ion-select>              
+    </ion-item>
+    <ion-item-divider color="light" (click)="launchLocationPage()">
+      {{ "APP.place" | translate }}: 
+      <span *ngIf="isRealLocation">{{ posMsg }}</span>
+      <span *ngIf="!isRealLocation">{{ posMsg | translate }}</span>
+    </ion-item-divider>
     <ion-item *ngIf="isLoading">
       <ion-spinner></ion-spinner>
     </ion-item>
     <ion-item color="light" *ngIf="posError" (click)="launchLocationPage()">
-      <h2 text-wrap>No s'ha pogut obtenir la posició actual.</h2>
-      <p text-wrap>Verifica el GPS i/o els permisos.</p>
+      <h2 text-wrap>{{ "Error.no-geolocation" | translate }}</h2>
+      <p text-wrap>{{ "Error.no-geolocation-suggestion" | translate }}</p>
       <ion-icon name="warning" color="danger" item-left></ion-icon>
     </ion-item>
     <ion-item (click)="launchLocationPage()">
-      <ion-label>Latitud</ion-label>
+      <ion-label>{{ "APP.lat" | translate }}</ion-label>
       <ion-note item-right>{{ lat | number: "1.1-7" }}</ion-note>
     </ion-item>
     <ion-item (click)="launchLocationPage()">
-        <ion-label>Longitud</ion-label>
+        <ion-label>{{ "APP.lon" | translate }}</ion-label>
         <ion-note item-right>{{ lon | number: "1.1-7" }}</ion-note>
       </ion-item>
   
-    <ion-item-divider color="light">Data</ion-item-divider>
+    <ion-item-divider color="light" (click)="selectDate()">{{ "APP.date" | translate }}</ion-item-divider>
     <ion-item (click)="selectDate()">
       <ion-icon name="search" item-left color="primary"></ion-icon>
-      <ion-note item-right>{{ dateMsg }}</ion-note>
+      <ion-note item-right *ngIf="isRealDate">{{ dateMsg }}</ion-note>
+      <ion-note item-right *ngIf="!isRealDate">{{ dateMsg | translate }}</ion-note>
     </ion-item>
 
-    <ion-item-divider color="light">Horari</ion-item-divider>
+    <ion-item-divider color="light">{{ "APP.timetable" | translate }}</ion-item-divider>
     <ion-item>
       <ion-icon name="sunny" color="orange" item-left></ion-icon>
       <ion-note item-right>{{ sunrise }}</ion-note>

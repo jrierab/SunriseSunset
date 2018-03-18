@@ -1,0 +1,20 @@
+{
+	"APP.title": "Sortida/posta de Sol",
+	"APP.place": "Lloc",
+	"APP.lat": "Latitud",
+	"APP.lon": "Longitud",
+	"APP.date": "Data",
+	"APP.timetable": "Horari",
+	"APP.today": "Avui",
+	"APP.current-pos": "Posició actual",
+	"APP.default-pos": "Per defecte",
+	"APP.date-choose": "Escull la data",
+	"APP.Done": "Fet",
+	"APP.Cancel": "Cancel·lar",
+	"APP.language": "Idioma",
+	"APP.lang-current": "Idioma actual",
+	"APP.Save": "Guardar",
+	"Error.no-geolocation": "No s'ha pogut obtenir la posició actual.",
+	"Error.no-geolocation-suggestion": "Verifica el GPS i/o els permisos.",
+	"Error.no-internet-suggestion": "Si et plau, connecta a Internet..."
+}

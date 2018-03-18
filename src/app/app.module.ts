@@ -11,13 +11,23 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { HttpClientModule } from '@angular/common/http';
+// ngx-translate
+import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { Geolocation } from '@ionic-native/geolocation';
 import { CalendarModule } from "ion2-calendar";
 import { LocationSelect } from '../pages/location-select/location-select';
 import { Connectivity } from '../providers/connectivity-service';
 import { GoogleMapsService } from '../providers/google-maps-service';
 import { Network } from '@ionic-native/network';
+import { LangService } from '../providers/lang-service';
+
+// Translations
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 @NgModule({
   declarations: [
@@ -32,6 +42,13 @@ import { Network } from '@ionic-native/network';
     BrowserModule,
     HttpClientModule,
     CalendarModule,
+    TranslateModule.forRoot({
+      loader: {
+          provide: TranslateLoader,
+          useFactory: (createTranslateLoader),
+          deps: [HttpClient]
+      }
+    }),
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -50,7 +67,8 @@ import { Network } from '@ionic-native/network';
     Geolocation,
     Connectivity,
     GoogleMapsService,
-    Network
+    Network,
+    LangService
   ]
 })
 export class AppModule {}

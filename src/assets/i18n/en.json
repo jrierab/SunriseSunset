@@ -1,0 +1,20 @@
+{
+	"APP.title": "Sunrise / Sunset",
+	"APP.place": "Place",
+	"APP.lat": "Latitude",
+	"APP.lon": "longitude",
+	"APP.date": "Date",
+	"APP.timetable": "Timetable",
+	"APP.today": "Today",
+	"APP.current-pos": "Current position",
+	"APP.default-pos": "By default",
+	"APP.date-choose": "Choose the date",
+	"APP.Done": "Done",
+	"APP.Cancel": "Cancel",
+	"APP.language": "Language",
+	"APP.lang-current": "Current language",
+	"APP.Save": "Save",
+	"Error.no-geolocation": "The current position could not be obtained.",
+	"Error.no-geolocation-suggestion": "Verify the GPS and / or permissions.",
+	"Error.no-internet-suggestion": "Please connect to the Internet..."
+}

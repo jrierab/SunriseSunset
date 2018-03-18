@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Connectivity } from './connectivity-service';
 import { Geolocation } from '@ionic-native/geolocation';
 
+import { LangService } from '../providers/lang-service';
+
 @Injectable()
 export class GoogleMapsService {
   mapElement: any;
@@ -15,8 +17,20 @@ export class GoogleMapsService {
 	lat: number = null;
 	lon: number = null;
 
-  constructor(public connectivityService: Connectivity, public geolocation: Geolocation) 
+  googleMapScriptElement : any;
+
+  constructor(  public connectivityService: Connectivity, 
+                public geolocation: Geolocation,
+                public langService : LangService,  
+              ) 
   {
+    this.langService.onLang.subscribe(lang=> {
+      if(this.googleMapScriptElement) {
+        console.log("[GoogleMapsService] Current lang: "+lang);
+
+        this.updateScriptSrc();
+      }
+    });
   }
 
   init(mapElement: any, pleaseConnect: any, lat: number, lon: number): Promise<any> {
@@ -37,7 +51,7 @@ export class GoogleMapsService {
         console.log("Google maps JavaScript needs to be loaded.");
         this.disableMap();
 
-        if(this.connectivityService.isOnline()){
+        if(this.connectivityService.isOnline()) {
 
           window['mapInit'] = () => {
 
@@ -48,16 +62,7 @@ export class GoogleMapsService {
             this.enableMap();
           }
 
-          let script = document.createElement("script");
-          script.id = "googleMaps";
-
-          if(this.apiKey){
-            script.src = 'http://maps.google.com/maps/api/js?key=' + this.apiKey + '&callback=mapInit&libraries=places';
-          } else {
-            script.src = 'http://maps.google.com/maps/api/js?callback=mapInit&libraries=places';       
-          }
-
-          document.body.appendChild(script);  
+          this.updateScriptSrc();
         } 
       } else {
 
@@ -73,6 +78,25 @@ export class GoogleMapsService {
 
       this.addConnectivityListeners();
     });
+  }
+
+  updateScriptSrc() {
+    let lang = this.langService.getCurrentLang();
+
+    console.log("[GoogleMapsService].updateScriptSrc with lang: "+lang);
+    
+    if(this.googleMapScriptElement) document.body.removeChild(this.googleMapScriptElement);
+
+    let script = document.createElement("script");
+    script.id = "googleMaps";
+
+    if(this.apiKey){
+      script.src = 'http://maps.google.com/maps/api/js?key=' + this.apiKey + '&callback=mapInit&libraries=places&language='+lang;
+    } else {
+      script.src = 'http://maps.google.com/maps/api/js?callback=mapInit&libraries=places&language='+lang;       
+    }    
+
+    this.googleMapScriptElement = document.body.appendChild(script);
   }
 
   initMap(): Promise<any> {
