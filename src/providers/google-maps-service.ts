@@ -85,7 +85,22 @@ export class GoogleMapsService {
 
     console.log("[GoogleMapsService].updateScriptSrc with lang: "+lang);
     
-    if(this.googleMapScriptElement) document.body.removeChild(this.googleMapScriptElement);
+    if(this.googleMapScriptElement) {
+      let head = document.getElementsByTagName('head')[0];
+      let scripts = Array.prototype.slice.call(head.getElementsByTagName('script'));
+      let styles = Array.prototype.slice.call(head.getElementsByTagName('style'));
+
+      scripts.forEach(s=> {
+        if(s.src.indexOf("://maps.google") != -1) head.removeChild(s);
+        else if(!s.src || s.src.indexOf("cordova.js") != -1 || s.src.indexOf("ion-dev.js") != -1) {}
+        else console.log("Skip removing <script src='"+s.src+"'");
+      });
+      styles.forEach(s=> {
+        if(s.textContent.indexOf(".gm-style") != -1) head.removeChild(s);
+        else console.log("Skip removing <style>", s);
+      });
+      document.body.removeChild(this.googleMapScriptElement);
+    }
 
     let script = document.createElement("script");
     script.id = "googleMaps";
