@@ -1,5 +1,8 @@
 {
 	"APP.title": "Sunrise / Sunset",
+	"APP.Home": "Home",
+	"APP.About": "About",
+	"APP.Contact": "Contact",
 	"APP.place": "Place",
 	"APP.lat": "Latitude",
 	"APP.lon": "longitude",
@@ -14,6 +17,9 @@
 	"APP.language": "Language",
 	"APP.lang-current": "Current language",
 	"APP.Save": "Save",
+	"APP.Buildthis": "Build this application step-by-step by following",
+	"APP.posts": "the blog posts",
+	"APP.blog": "Blog",	
 	"Error.no-geolocation": "The current position could not be obtained.",
 	"Error.no-geolocation-suggestion": "Verify the GPS and / or permissions.",
 	"Error.no-internet-suggestion": "Please connect to the Internet..."

@@ -1,17 +1,32 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Contact
+      {{ "APP.Contact" | translate }}
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-list-header>Follow us on Twitter</ion-list-header>
-    <ion-item>
-      <ion-icon name="ionic" item-start></ion-icon>
-      @ionicframework
-    </ion-item>
-  </ion-list>
+  <ion-grid>
+
+    <ion-row>
+      <ion-col col-1><ion-icon name="ios-checkmark-outline"></ion-icon></ion-col>
+      <ion-col col-11>
+        Jordi Riera-Baburés
+        <br />
+        <br />Github: <a href="https://github.com/jrierab" title="GitHub" target="_blank">jrierab</a>      
+        <br />{{ "APP.blog" | translate }}: <a href="https://anomenaidesa.blogspot.com.es" title="https://anomenaidesa.blogspot.com.es" target="_blank">https://anomenaidesa.blogspot.com.es</a>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col col-1><ion-icon name="ios-checkmark-outline"></ion-icon></ion-col>
+      <ion-col col-11>
+        {{ "APP.Buildthis" | translate }} 
+        <a href="https://anomenaidesa.blogspot.com.es/search/label/Sunrise" title="{{ 'APP.posts' | translate }}" target="_blank">{{ "APP.posts" | translate }}</a>
+      </ion-col>
+    </ion-row>
+    
+
+  </ion-grid>
 </ion-content>

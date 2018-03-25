@@ -1,5 +1,8 @@
 {
 	"APP.title": "Sortida/posta de Sol",
+	"APP.Home": "Inici",
+	"APP.About": "Sobre",
+	"APP.Contact": "Contacte",
 	"APP.place": "Lloc",
 	"APP.lat": "Latitud",
 	"APP.lon": "Longitud",
@@ -14,6 +17,9 @@
 	"APP.language": "Idioma",
 	"APP.lang-current": "Idioma actual",
 	"APP.Save": "Guardar",
+	"APP.Buildthis": "Construeix aquesta aplicació pas a pas seguint",
+	"APP.posts": "els articles del bloc",
+	"APP.blog": "Bloc",
 	"Error.no-geolocation": "No s'ha pogut obtenir la posició actual.",
 	"Error.no-geolocation-suggestion": "Verifica el GPS i/o els permisos.",
 	"Error.no-internet-suggestion": "Si et plau, connecta a Internet..."

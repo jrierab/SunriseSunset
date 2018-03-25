@@ -87,5 +87,34 @@ $colors: (
 // Fonts
 // --------------------------------------------------
 
-@import "roboto";
-@import "noto-sans";
+//@import "roboto";
+//@import "noto-sans";
+
+@font-face {
+  font-family: "Poppins";
+  //font-style: normal;
+  //font-weight: 400;
+  src:  url($font-path+'/Poppins-Regular.ttf');
+}
+@font-face {
+  font-family: "Poppins";
+  src:  url($font-path+'/Poppins-Bold.ttf');
+  font-weight: bold;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url($font-path+'/Poppins-Italic.ttf');
+  font-style: italic;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url($font-path+'/Poppins-BoldItalic.ttf');
+  font-weight: bold;
+  font-style: italic;
+}
+
+$font-family-base: "Poppins";
+
+$font-family-md-base: "Poppins";
+$font-family-ios-base: "Poppins";
+$font-family-wp-base: "Poppins";

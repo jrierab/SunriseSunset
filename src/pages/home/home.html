@@ -4,10 +4,10 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content no-padding>
   <ion-list>
     <ion-item-divider color="light">{{ "APP.language" | translate }}</ion-item-divider>
-    <ion-item>
+    <ion-item no-lines>
       <ion-label>{{ "APP.lang-current" | translate }}</ion-label>
       <ion-select [(ngModel)]="lang" (ionChange)="doChangeLang()" item-right>
         <ion-option value="ca">Català</ion-option>
@@ -31,13 +31,13 @@
       <ion-label>{{ "APP.lat" | translate }}</ion-label>
       <ion-note item-right>{{ lat | number: "1.1-7" }}</ion-note>
     </ion-item>
-    <ion-item (click)="launchLocationPage()">
+    <ion-item (click)="launchLocationPage()" no-lines>
         <ion-label>{{ "APP.lon" | translate }}</ion-label>
         <ion-note item-right>{{ lon | number: "1.1-7" }}</ion-note>
       </ion-item>
   
     <ion-item-divider color="light" (click)="selectDate()">{{ "APP.date" | translate }}</ion-item-divider>
-    <ion-item (click)="selectDate()">
+    <ion-item (click)="selectDate()" no-lines>
       <ion-icon name="search" item-left color="primary"></ion-icon>
       <ion-note item-right *ngIf="isRealDate">{{ dateMsg }}</ion-note>
       <ion-note item-right *ngIf="!isRealDate">{{ dateMsg | translate }}</ion-note>
@@ -45,11 +45,11 @@
 
     <ion-item-divider color="light">{{ "APP.timetable" | translate }}</ion-item-divider>
     <ion-item>
-      <ion-icon name="sunny" color="orange" item-left></ion-icon>
+      <ion-icon name="custom-sunrise" color="orange" item-left></ion-icon>
       <ion-note item-right>{{ sunrise }}</ion-note>
     </ion-item>
     <ion-item>
-      <ion-icon name="moon" color="blue" item-left></ion-icon>
+      <ion-icon name="custom-sunset" color="blue" item-left></ion-icon>
       <ion-note item-right>{{ sunset }}</ion-note>
     </ion-item>
 
