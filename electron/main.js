@@ -9,13 +9,25 @@ const BrowserWindow = electron.BrowserWindow;
 const path = require('path');
 const url = require('url');
 
+// Module for file manipulations
+const fs = require('fs');
+
+// config json
+let config_file = path.dirname(process.execPath)+'/config_keys.json';
+
+if(!fs.existsSync(config_file)) config_file = app.getAppPath()+'/config_keys.json';
+
+const config = JSON.parse(fs.readFileSync(config_file, 'utf-8'));
+
+process.env.GOOGLE_API_KEY = config.GOOGLE_API_KEY;  //  = "YOUR_API_KEY";
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
 
 function createWindow() {
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 1200, height: 800});
+  mainWindow = new BrowserWindow({width: 1024, height: 768});
 
   // and load the index.html of the app.
   const startUrl = process.env.ELECTRON_START_URL || url.format({

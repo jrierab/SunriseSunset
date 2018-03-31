@@ -13,7 +13,7 @@ export class GoogleMapsService {
   mapLoaded: any;
   mapLoadedObserver: any;
   currentMarker: any;
-  apiKey: string; //  = "YOUR_API_KEY";
+  apiKey: string = "";  //  = "YOUR_API_KEY";
 	lat: number = null;
 	lon: number = null;
 

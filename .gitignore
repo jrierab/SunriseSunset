@@ -42,3 +42,8 @@ UserInterfaceState.xcuserstate
 # Envrionment Variables
 # **/environment.*
 # !**/environment.model.ts
+config_keys.json
+tsconfig.json_new
+
+# Releases
+APK/
