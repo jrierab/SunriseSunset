@@ -39,7 +39,7 @@ npm install
 ```
 cp config_keys_template.json config_keys.json
 ```
-	then edit it to fill with your Google API key for [Geolocation](https://developers.google.com/maps/documentation/geolocation/get-api-key) and [Maps](https://developers.google.com/maps/documentation/javascript/get-api-key).
+then edit it to fill with your Google API key for [Geolocation](https://developers.google.com/maps/documentation/geolocation/get-api-key) and [Maps](https://developers.google.com/maps/documentation/javascript/get-api-key).
 
 ### Build
 1. Test on browser
