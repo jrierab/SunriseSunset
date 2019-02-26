@@ -1,12 +1,10 @@
 # SunriseSunset
 
-![Android / iOS](https://github.com/jrierab/SunriseSunset/tree/master/images/IonicApp_sunrise_06.png)
-![Calendar](https://github.com/jrierab/SunriseSunset/tree/master/images/IonicApp_sunrise_15.png)
-![Google Maps](https://github.com/jrierab/SunriseSunset/tree/master/images/IonicApp_sunrise_21.png)
-![Multi-language](https://github.com/jrierab/SunriseSunset/tree/master/images/IonicApp_sunrise_19.png)
-
 [Català](#català)
 [English](#english)
+
+![](https://github.com/jrierab/SunriseSunset/raw/master/images/IonicApp_sunrise_A.png?raw=true "Android/iOS")
+![](https://github.com/jrierab/SunriseSunset/raw/master/images/IonicApp_sunrise_B.png?raw=true "Calendar/Google Maps")
 
 ## English
 Application to show the sunrise/sunset time at a specific location, using Ionic an electron. You can generate an application for desktop, Android, iOS or the browser.
